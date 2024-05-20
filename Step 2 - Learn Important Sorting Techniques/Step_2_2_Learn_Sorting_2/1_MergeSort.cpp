@@ -8,6 +8,7 @@ void printArray(int nums[], int n)
     }
     cout << endl;
 }
+// * Combine the array by comparing elements
 void mergeSort(int nums[], int low, int mid, int high)
 {
     vector<int> temp;
@@ -41,6 +42,7 @@ void mergeSort(int nums[], int low, int mid, int high)
         nums[i] = temp[i - low];
     }
 }
+// * Divide the array
 void mergeDivide(int nums[], int low, int high)
 {
     if (low >= high)

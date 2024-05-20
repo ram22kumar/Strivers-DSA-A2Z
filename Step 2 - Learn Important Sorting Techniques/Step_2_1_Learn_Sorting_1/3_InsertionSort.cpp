@@ -16,9 +16,7 @@ void insertionSort(int nums[], int n)
         int j = i;
         while (j > 0 && nums[j - 1] > nums[j])
         {
-            int temp = nums[j - 1];
-            nums[j - 1] = nums[j];
-            nums[j] = temp;
+            swap(nums[j - 1], nums[j]);
             j--;
         }
     }

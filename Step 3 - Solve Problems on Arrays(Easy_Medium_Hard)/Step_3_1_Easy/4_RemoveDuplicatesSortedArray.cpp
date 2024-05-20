@@ -35,9 +35,7 @@ int optimalRemoveDuplicates(int nums[], int n)
         }
         else if (nums[i] != nums[j])
         {
-            int temp = nums[i + 1];
-            nums[i + 1] = nums[j];
-            nums[j] = temp;
+            swap(nums[i + 1], nums[j]);
             i++;
             j++;
         }

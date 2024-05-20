@@ -25,14 +25,10 @@ int partitionFinder(int nums[], int low, int high)
         }
         if (i < j)
         {
-            int temp = nums[i];
-            nums[i] = nums[j];
-            nums[j] = temp;
+            swap(nums[i], nums[j]);
         }
     }
-    int temp2 = nums[low];
-    nums[low] = nums[j];
-    nums[j] = temp2;
+    swap(nums[low], nums[j]);
     return j;
 }
 void quickSort(int nums[], int low, int high)

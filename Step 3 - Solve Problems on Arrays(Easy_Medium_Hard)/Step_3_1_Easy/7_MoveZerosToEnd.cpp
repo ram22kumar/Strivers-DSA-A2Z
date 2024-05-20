@@ -43,14 +43,14 @@ int *optimalApproachMoveZerosToEnd(int nums[], int n)
             break;
         }
     }
+    if (j == -1)
+        return nums;
     for (int i = j + 1; i < n; i++)
     {
         if (nums[i] != 0)
         {
-            int temp = nums[i];
-            nums[i] = nums[j];
+            swap(nums[i], nums[j]);
             j++;
-            nums[j] = temp;
         }
     }
     return nums;
@@ -67,9 +67,9 @@ int main()
         cin >> nums[i];
     }
     vector<int> out = bruteMoveZerosToEnd(nums, n);
-    cout << "Vector : ";
+    cout << "Brute Output : ";
     printVector(out, out.size());
     int *optimalOutput = optimalApproachMoveZerosToEnd(nums, n);
-    cout << "Output : ";
+    cout << "Optimal Output : ";
     printArray(optimalOutput, n);
 }
