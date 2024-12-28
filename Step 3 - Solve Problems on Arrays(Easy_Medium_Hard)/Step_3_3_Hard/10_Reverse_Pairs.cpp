@@ -1,27 +1,25 @@
 #include <bits/stdc++.h>
 using namespace std;
-int bruteApproach(vector<int> nums, int n)
+int bruteApproach(vector<int> nums, int size)
 {
-    int cnt = 0;
-    for (int i = 0; i < n - 1; i++)
+    int count = 0;
+    for (int i = 0; i < size; i++)
     {
-        for (int j = i + 1; j < n; j++)
+        for (int j = i + 1; j < size; j++)
         {
-            if (nums[i] > nums[j])
+            if (nums[i] > 2 * nums[j])
             {
-                cnt++;
+                count++;
             }
         }
     }
-    return cnt;
+    return count;
 }
-int merge(vector<int> &nums, int low, int mid, int high)
+void merge(vector<int> &nums, int low, int mid, int high)
 {
-    int count = 0;
     vector<int> temp;
     int left = low;
     int right = mid + 1;
-
     while (left <= mid && right <= high)
     {
         if (nums[left] <= nums[right])
@@ -32,45 +30,54 @@ int merge(vector<int> &nums, int low, int mid, int high)
         else
         {
             temp.push_back(nums[right]);
-            count += (mid - left + 1);
             right++;
         }
     }
-
     while (left <= mid)
     {
         temp.push_back(nums[left]);
         left++;
     }
-    while (right <= high)
+    while (right <= mid)
     {
         temp.push_back(nums[right]);
         right++;
     }
-
     for (int i = low; i <= high; i++)
     {
         nums[i] = temp[i - low];
     }
+}
+int countVals(vector<int> &nums, int low, int mid, int high)
+{
+    int count = 0;
+    int right = mid + 1;
+    for (int i = low; i <= mid; i++)
+    {
+        while (right <= high && nums[i] > 2 * nums[right])
+            right++;
+        count += (right - (mid + 1));
+    }
+
     return count;
 }
-int mergeSortBased(vector<int> &nums, int low, int high)
+int mergeSort(vector<int> &nums, int low, int high)
 {
     int count = 0;
     if (low >= high)
     {
         return count;
     }
-    int mid = (low + high) / 2;
-    count += mergeSortBased(nums, low, mid);
-    count += mergeSortBased(nums, mid + 1, high);
-    count += merge(nums, low, mid, high);
-
+    int mid = low + (high - low) / 2;
+    count += mergeSort(nums, low, mid);
+    count += mergeSort(nums, mid + 1, high);
+    count += countVals(nums, low, mid, high);
+    merge(nums, low, mid, high);
     return count;
 }
-int optimalApproach(vector<int> nums, int n)
+int optimalApproach(vector<int> nums, int size)
 {
-    return mergeSortBased(nums, 0, n);
+    return mergeSort(nums, 0, size - 1);
 }
 int main()
 {
@@ -85,7 +92,8 @@ int main()
         cin >> temp;
         nums.push_back(temp);
     }
-    cout << "Brute Force Approach : ";
+
+    cout << "Brute approach : ";
     cout << bruteApproach(nums, size) << endl;
     cout << "Optimal Approach : ";
     cout << optimalApproach(nums, size) << endl;
