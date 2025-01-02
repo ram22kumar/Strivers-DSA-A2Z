@@ -38,7 +38,7 @@ void merge(vector<int> &nums, int low, int mid, int high)
         temp.push_back(nums[left]);
         left++;
     }
-    while (right <= mid)
+    while (right <= high)
     {
         temp.push_back(nums[right]);
         right++;
@@ -54,11 +54,12 @@ int countVals(vector<int> &nums, int low, int mid, int high)
     int right = mid + 1;
     for (int i = low; i <= mid; i++)
     {
-        while (right <= high && nums[i] > 2 * nums[right])
+        while (right <= high && nums[i] > 2 * (long long)nums[right])
+        {
             right++;
+        }
         count += (right - (mid + 1));
     }
-
     return count;
 }
 int mergeSort(vector<int> &nums, int low, int high)
@@ -68,14 +69,14 @@ int mergeSort(vector<int> &nums, int low, int high)
     {
         return count;
     }
-    int mid = low + (high - low) / 2;
+    int mid = (low + high) / 2;
     count += mergeSort(nums, low, mid);
     count += mergeSort(nums, mid + 1, high);
     count += countVals(nums, low, mid, high);
     merge(nums, low, mid, high);
     return count;
 }
-int optimalApproach(vector<int> nums, int size)
+int optimalApproach(vector<int> &nums, int size)
 {
     return mergeSort(nums, 0, size - 1);
 }
