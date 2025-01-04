@@ -35,6 +35,5 @@ int main()
     int target;
     cout << "Enter target: ";
     cin >> target;
-    cout << "Lower bound for " << target << " is " << lowerBound(nums, size, target) << "." << endl;
-    cout << "Lower Bound for " << target << " using lower_bound inbuilt C++ STL is " << *lower_bound(nums.begin(), nums.end(), target) << endl;
+    cout << "Position to be inserted for " << target << " is " << lowerBound(nums, size, target) << "." << endl;
 }

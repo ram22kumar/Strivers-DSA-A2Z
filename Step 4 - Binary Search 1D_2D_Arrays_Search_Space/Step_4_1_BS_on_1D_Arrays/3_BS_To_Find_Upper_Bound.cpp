@@ -36,4 +36,5 @@ int main()
     cout << "Enter target: ";
     cin >> target;
     cout << "Upper bound for " << target << " is " << upperBound(nums, size, target) << "." << endl;
+    cout << "Upper Bound for " << target << " using upper_bound inbuilt C++ STL is " << *upper_bound(nums.begin(), nums.end(), target) << endl;
 }
